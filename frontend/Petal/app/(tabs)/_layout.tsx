@@ -24,47 +24,38 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="scan"
         options={{
-          title: 'Explore',
+          title: 'Scan',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <TabBarIcon name={focused ? 'scan' : 'scan-outline'} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="welcome"
+        name="location"
         options={{
-          title: 'Welcome Page',
+          title: 'Locate',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'woman-sharp' : 'woman-sharp'} color={color} />
+            <TabBarIcon name={focused ? 'location' : 'location-outline'} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="recommendation"
+        name="reward"
         options={{
-          title: 'Reco Page',
+          title: 'Rewards',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <TabBarIcon name={focused ? 'trophy' : 'trophy-outline'} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="map"
+        name="faq"
         options={{
-          title: 'Map Page',
+          title: 'FAQ',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="chatbot"
-        options={{
-          title: 'chatbot',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <TabBarIcon name={focused ? 'help' : 'help-outline'} color={color} />
           ),
         }}
       />

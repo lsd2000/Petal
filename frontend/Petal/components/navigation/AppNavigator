@@ -1,0 +1,41 @@
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+
+import LoginScreen from './LoginScreen';  // Import your login screen
+import WelcomeScreen from './WelcomeScreen';  // Import your welcome screen
+import HomeScreen from './HomeScreen';  // Import other screens
+import { useAuth } from './hooks/useAuth';  // Import your auth hook or context
+
+const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+function AuthStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Login" component={LoginScreen} />
+      {/* You can add more screens if needed */}
+    </Stack.Navigator>
+  );
+}
+
+function AppTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Welcome" component={WelcomeScreen} />
+      {/* Add more tabs as needed */}
+    </Tab.Navigator>
+  );
+}
+
+export default function AppNavigator() {
+  const { isAuthenticated } = useAuth();  // Check authentication status
+
+  return (
+    <NavigationContainer>
+      {isAuthenticated ? <AppTabs /> : <AuthStack />}
+    </NavigationContainer>
+  );
+}
