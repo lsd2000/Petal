@@ -32,6 +32,42 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="welcome"
+        options={{
+          title: 'Welcome Page',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'woman-sharp' : 'woman-sharp'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="recommendation"
+        options={{
+          title: 'Reco Page',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="map"
+        options={{
+          title: 'Map Page',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="chatbot"
+        options={{
+          title: 'chatbot',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
