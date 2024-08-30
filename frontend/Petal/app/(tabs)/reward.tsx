@@ -34,13 +34,11 @@ export default function Rewards() {
         <ThemedText type="title">Rewards</ThemedText>
       </ThemedView>
 
-      {/* User Information */}
       <ThemedView style={styles.userInfoContainer}>
         <ThemedText type="subtitle">User: Shao Dong</ThemedText>
         <ThemedText type="subtitle">Points: {userPoints}</ThemedText>
       </ThemedView>
 
-      {/* Gold Member Bonus Section */}
       <ThemedView style={styles.sectionContainer}>
         <ThemedText type="subtitle">Gold Member Bonus</ThemedText>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
@@ -50,7 +48,7 @@ export default function Rewards() {
               style={styles.itemContainer}
               onPress={() => handleClaimReward(item.pointsRequired, item.name)}
             >
-              <Image source={{ uri: item.image }} style={styles.itemImage} />
+              <Image source={item.image } style={styles.itemImage} />
               <ThemedText style={styles.itemName}>{item.name}</ThemedText>
               <ThemedText style={styles.itemDescription}>{item.description}</ThemedText>
               <ThemedText style={styles.itemPoints}>Points Required: {item.pointsRequired}</ThemedText>
@@ -59,7 +57,6 @@ export default function Rewards() {
         </ScrollView>
       </ThemedView>
 
-      {/* Silver Member Bonus Section */}
       <ThemedView style={styles.sectionContainer}>
         <ThemedText type="subtitle">Silver Member Bonus</ThemedText>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
@@ -86,7 +83,7 @@ const goldMemberItems = [
   {
     name: 'Gold Member Exclusive Item 1',
     description: '20% off on all store items.',
-    image: 'https://example.com/item1.jpg', // Replace with actual item image URL
+    image: require('@/assets/images/grab.png'), // Replace with actual item image URL
     pointsRequired: 5000,
   },
   {
