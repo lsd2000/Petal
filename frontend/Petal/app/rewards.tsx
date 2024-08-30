@@ -180,6 +180,10 @@ const styles = StyleSheet.create({
   titleContainer: {
     alignItems: 'center',
     marginVertical: 20,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 5,
   },
   userInfoContainer: {
     marginVertical: 15,
@@ -200,6 +204,12 @@ const styles = StyleSheet.create({
   sectionContainer: {
     marginVertical: 10,
     paddingHorizontal: 15,
+    backgroundColor: '#FFF',
+    borderRadius: 15,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 5,
   },
   sectionTitle: {
     fontSize: 20,
@@ -260,6 +270,9 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: '100%',
     elevation: 5,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
   },
   navButton: {
     alignItems: 'center',
@@ -271,7 +284,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#333',
     marginTop: 4,
-
   },
   spacer: {
     height: 80, // Space to push navbar to the bottom
