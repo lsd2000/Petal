@@ -24,11 +24,38 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="scan"
         options={{
-          title: 'Explore',
+          title: 'Scan',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <TabBarIcon name={focused ? 'scan' : 'scan-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="location"
+        options={{
+          title: 'Locate',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'location' : 'location-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="reward"
+        options={{
+          title: 'Rewards',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'trophy' : 'trophy-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="faq"
+        options={{
+          title: 'FAQ',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'help' : 'help-outline'} color={color} />
           ),
         }}
       />
