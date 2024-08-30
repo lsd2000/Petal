@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { Link } from "expo-router";
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { Link } from 'expo-router';
 import {
   StyleSheet,
+  Image,
   View,
+  ScrollView,
+  TouchableOpacity,
+  Linking,
+  useColorScheme,
   Text,
 } from "react-native";
 import * as Location from "expo-location";
 import MapView, { Marker } from "react-native-maps";
 
-
 // To locate the nearest recycling bin, an api should be used instead
-
 const sampleRecyclingBins = [
   {
     id: 1,
@@ -66,8 +69,6 @@ export default function Locate() {
 
   return (
     <View style={styles.container}>
-
-
       {/* Body content */}
       <View style={{ maxHeight:"100%", flex: 1, alignItems: "center", justifyContent: "center" }}>
         {location ? (
@@ -84,7 +85,6 @@ export default function Locate() {
             ))}
           </MapView>
         ) : (
-          
           <Text style={{}}>
             {errorMsg ? errorMsg : "Requesting permissions... "}
           </Text>
