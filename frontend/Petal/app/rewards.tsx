@@ -8,7 +8,8 @@ import { ThemedView } from '@/components/ThemedView';
 
 export default function Home() {
   const colorScheme = useColorScheme();
-
+  
+  // Fake user data
   const [userPoints, setUserPoints] = useState(19256); // Initial points
   
   const handleClaimReward = (pointsRequired: number, rewardName: string) => {
@@ -47,11 +48,17 @@ export default function Home() {
         />
 
         <ThemedView style={styles.titleContainer}>
+          <Ionicons name="gift-outline" size={24} color="#333" style={styles.icon} />
           <ThemedText type="title" style={styles.titleText}>Rewards</ThemedText>
         </ThemedView>
 
         <ThemedView style={styles.userInfoContainer}>
+          <Ionicons name="person-outline" size={24} color="#333" style={styles.icon} />
           <ThemedText type="subtitle" style={styles.userInfoText}>User: Shao Dong</ThemedText>
+        </ThemedView>
+
+        <ThemedView style={styles.userInfoContainer}>
+          <Ionicons name="cash-outline" size={24} color="#333" style={styles.icon} />
           <ThemedText type="subtitle" style={styles.userInfoText}>Points: {userPoints}</ThemedText>
         </ThemedView>
 
@@ -180,7 +187,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   scrollContentContainer: {
-    paddingBottom: 80, // Ensure space for the navbar
+    paddingBottom: 80,
   },
   banner: {
     width: '100%',
@@ -188,15 +195,21 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   titleContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 20,
+    justifyContent: 'center',
     backgroundColor: '#FFF',
+    marginVertical: 20,
   },
   titleText: {
+    fontSize: 24,
+    fontWeight: '700',
     color: '#333',
-    fontFamily: 'Roboto-Regular',
+    fontFamily: 'Roboto-Bold',
   },
   userInfoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginVertical: 15,
     padding: 20,
     backgroundColor: '#FFF',
@@ -205,12 +218,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 10,
     elevation: 5,
-    alignItems: 'center',
   },
   userInfoText: {
     fontSize: 18,
     color: '#333',
     fontFamily: 'Roboto-Regular',
+    marginLeft: 10,
+  },
+  icon: {
+    marginHorizontal: 10,
   },
   sectionContainer: {
     marginVertical: 10,
@@ -294,6 +310,6 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   spacer: {
-    height: 80, // Space to push navbar to the bottom
+    height: 80,
   },
 });
