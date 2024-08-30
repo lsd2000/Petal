@@ -165,7 +165,7 @@ const silverMemberItems = [
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F4F4F4',
+    backgroundColor: '#FFFFFF',
   },
   scrollContentContainer: {
     paddingBottom: 80, // Ensure space for the navbar
@@ -174,8 +174,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 180,
     resizeMode: 'cover',
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
   },
   titleContainer: {
     alignItems: 'center',
@@ -206,9 +204,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     backgroundColor: '#FFF',
     borderRadius: 15,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
     elevation: 5,
   },
   sectionTitle: {
