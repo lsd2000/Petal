@@ -13,12 +13,29 @@ export default function Home() {
   const [userPoints, setUserPoints] = useState(19256); // Initial points
   
   const handleClaimReward = (pointsRequired: number, rewardName: string) => {
-    if (userPoints >= pointsRequired) {
-      setUserPoints(userPoints - pointsRequired);
-      Alert.alert('Reward Claimed!', `You have successfully claimed ${rewardName}.`);
-    } else {
+    if (userPoints < pointsRequired) {
       Alert.alert('Insufficient Points', 'You do not have enough points to claim this reward.');
+      return;
     }
+    
+    Alert.alert(
+      'Confirm Redemption',
+      `Are you sure you want to claim "${rewardName}" for ${pointsRequired} points?`,
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Confirm',
+          onPress: () => {
+            setUserPoints(userPoints - pointsRequired);
+            Alert.alert('Reward Claimed!', `You have successfully claimed ${rewardName}.`);
+          },
+        },
+      ],
+      { cancelable: true }
+    );
   };
 
   return (
@@ -32,7 +49,7 @@ export default function Home() {
 
         {/* Title and User Info */}
         <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Rewards</ThemedText>
+          <ThemedText type="title" style={styles.titleText}>Rewards</ThemedText>
         </ThemedView>
 
         <ThemedView style={styles.userInfoContainer}>
@@ -178,10 +195,11 @@ const styles = StyleSheet.create({
   titleContainer: {
     alignItems: 'center',
     marginVertical: 20,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 5,
+    backgroundColor: '#FFF',
+  },
+  titleText: {
+    color: '#333',
+    fontFamily: 'Roboto-Regular',
   },
   userInfoContainer: {
     marginVertical: 15,
