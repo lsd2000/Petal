@@ -15,6 +15,7 @@ export default function Home() {
 
         {/* JUNHUI PUT UR CONTENT HERE, SCROLL SHUD BE ENABLED ALRDY*/}
 
+
         {/* Spacer to push navbar to the bottom */}
         <View style={styles.spacer} />
       </ScrollView>
