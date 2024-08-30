@@ -32,7 +32,7 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="welcome"
         options={{
           title: 'Welcome Page',
@@ -40,7 +40,7 @@ export default function TabLayout() {
             <TabBarIcon name={focused ? 'woman-sharp' : 'woman-sharp'} color={color} />
           ),
         }}
-      />
+      /> */}
       <Tabs.Screen
         name="recommendation"
         options={{
@@ -50,7 +50,7 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="map"
         options={{
           title: 'Map Page',
@@ -58,8 +58,8 @@ export default function TabLayout() {
             <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
           ),
         }}
-      />
-      <Tabs.Screen
+      /> */}
+      {/* <Tabs.Screen
         name="chatbot"
         options={{
           title: 'chatbot',
@@ -67,7 +67,7 @@ export default function TabLayout() {
             <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
           ),
         }}
-      />
+      /> */}
     </Tabs>
   );
 }
