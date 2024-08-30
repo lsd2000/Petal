@@ -1,18 +1,23 @@
 import React from "react";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Link } from 'expo-router';
-import { StyleSheet, Image, View, ScrollView, TouchableOpacity, Linking, useColorScheme, Text } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { StyleSheet, View, Text, Image, ScrollView, Linking, TouchableOpacity } from 'react-native';
 
 export default function Home() {
   return (
     <View style={styles.container}>
-      {/* Body content */}
-      <Text>Rewards</Text>
+      <ScrollView contentContainerStyle={styles.scrollContentContainer}>
+        {/* Banner Image */}
+        <Image
+          source={require('../assets/images/topbanner.jpg')} // Replace with your local image path
+          style={styles.banner}
+        />
+
+        {/* JUNHUI PUT UR CONTENT HERE, SCROLL SHUD BE ENABLED ALRDY*/}
+
+        {/* Spacer to push navbar to the bottom */}
+        <View style={styles.spacer} />
+      </ScrollView>
 
       {/* Bottom Navbar */}
       <View style={styles.navbar}>
@@ -54,7 +59,15 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-between",
+    backgroundColor: '#fff',
+  },
+  scrollContentContainer: {
+    paddingBottom: 80, // To ensure space for the navbar
+  },
+  banner: {
+    width: '100%',
+    height: 150, // Adjust the height as needed
+    resizeMode: 'cover',
   },
   navbar: {
     flexDirection: "row",
@@ -63,11 +76,17 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderTopWidth: 1,
     borderTopColor: "#ccc",
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
   },
   navButton: {
     alignItems: "center",
   },
   iconTextContainer: {
     alignItems: "center",
+  },
+  spacer: {
+    height: 80, // Adjust this value to create enough space above the navbar
   },
 });
