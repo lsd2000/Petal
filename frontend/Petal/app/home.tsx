@@ -1,10 +1,11 @@
 import React, { useState, useRef } from "react";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Link } from 'expo-router';
-import { StyleSheet, View, Text, Image, ScrollView, Linking, TouchableOpacity, Animated, Easing } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, Linking, TouchableOpacity, Animated, Easing, Modal, Pressable } from 'react-native';
 
 export default function Home() {
   const [flipped, setFlipped] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const flipAnimation = useRef(new Animated.Value(0)).current;
 
   const flipCard = () => {
@@ -53,10 +54,10 @@ export default function Home() {
               <Text style={styles.infoValueGold}>Gold</Text>
             </View>
           </View>
-          <View style={styles.infoBox}>
-            <Text style={styles.infoTitle}>Lifteime Earnings:</Text>
+          <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.infoBox}>
+            <Text style={styles.infoTitle}>Lifetime Earnings:</Text>
             <Text style={styles.infoValueBlack}>48250</Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         {/* Tip of the Day Card */}
@@ -217,6 +218,27 @@ export default function Home() {
           </View>
         </Link>
       </View>
+
+      <Modal
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(false);
+        }}
+      >
+        <View style={styles.modalView}>
+          <Image
+            source={require('@/assets/images/leaderboard.png')}
+            style={styles.modalImage}
+          />
+          <Pressable
+            style={styles.closeButton}
+            onPress={() => setModalVisible(false)}
+          >
+            <Text style={styles.closeButtonText}>Close</Text>
+          </Pressable>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -381,5 +403,27 @@ const styles = StyleSheet.create({
   },
   cardFrontContent: {
     alignItems: 'center',
+  },
+  modalView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  modalImage: {
+    width: '90%',
+    height: '70%',
+    resizeMode: 'contain',
+    borderRadius: 10,
+  },
+  closeButton: {
+    marginTop: 20,
+    padding: 10,
+    backgroundColor: 'white',
+    borderRadius: 5,
+  },
+  closeButtonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
