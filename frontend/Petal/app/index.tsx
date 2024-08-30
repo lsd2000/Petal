@@ -32,7 +32,7 @@ export default function Index() {
           onChangeText={(passwordtext) => setPasswordText(passwordtext)}
         />
         <View style={styles.buttonContainer}>
-          <Link href="/tabs/home" asChild >
+          <Link href="/home" asChild>
           <Button style={{backgroundColor:"#FC6C85"}}mode="contained" onPress={() => console.log("Pressed")}>
             Login
           </Button>
