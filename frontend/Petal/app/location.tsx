@@ -14,7 +14,32 @@ import {
 import * as Location from "expo-location";
 import MapView, { Marker } from "react-native-maps";
 
+
+// To locate the nearest recycling bin, an api should be used instead
+const sampleRecyclingBins = [
+  {
+    id: 1,
+    name: "Recycling Bin 1",
+    latitude: 1.3521,
+    longitude: 103.8198,
+  },
+  {
+    id: 2,
+    name: "Recycling Bin 2",
+    latitude: 1.3435,
+    longitude: 103.8231,
+  },
+  {
+    id: 3,
+    name: "Recycling Bin 3",
+    latitude: 1.3478,
+    longitude: 103.8103,
+  },
+  // Add more locations as needed
+];
+
 export default function Locate() {
+
   const [location, setLocation] = useState<{
     latitude: number;
     longitude: number;
@@ -23,6 +48,7 @@ export default function Locate() {
   } | null>(null);
 
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [recyclingBins, setRecyclingBins] = useState(sampleRecyclingBins);
 
   useEffect(() => {
     (async () => {
@@ -47,14 +73,24 @@ export default function Locate() {
 
 
       {/* Body content */}
-      <View style={{ maxHeight:"90%", flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ maxHeight:"100%", flex: 1, alignItems: "center", justifyContent: "center" }}>
         {location ? (
           <MapView style={styles.map} initialRegion={location}>
             <Marker coordinate={location} title="Your Location" />
+            {recyclingBins.map((bin) => (
+              <Marker
+                key={bin.id}
+                coordinate={{ latitude: bin.latitude, longitude: bin.longitude }}
+                title={bin.name}
+                description={"Tap for more info"}
+                pinColor="green"
+              />
+            ))}
           </MapView>
         ) : (
-          <Text style={{ textAlign: "center", flex: 1, justifyContent: "center", alignItems: "center" }}>
-            {errorMsg ? errorMsg : "TESTING TESTING Requesting permissions... TESTING TESTING"}
+          
+          <Text style={{}}>
+            {errorMsg ? errorMsg : "Requesting permissions... "}
           </Text>
         )}
       </View>
