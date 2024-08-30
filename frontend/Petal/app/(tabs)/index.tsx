@@ -10,7 +10,7 @@ import { ThemedView } from '@/components/ThemedView';
 export default function Welcome() {
   const colorScheme = useColorScheme(); // Gets the current theme (light or dark)
 
-  const handlePress = (url) => {
+  const handlePress = (url: string) => {
     Linking.openURL(url).catch(err => console.error("Failed to open URL", err));
   };
 
@@ -20,7 +20,7 @@ export default function Welcome() {
       headerImage={
         <Image
           source={require('@/assets/images/petal.jpg')}
-          style={styles.reactLogo}
+        //   style={styles.reactLogo}
         />
       }>
       <ThemedView style={styles.titleContainer}>
