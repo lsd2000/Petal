@@ -3,12 +3,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { Link } from "expo-router";
 import {
   StyleSheet,
-  Image,
   View,
-  ScrollView,
-  TouchableOpacity,
-  Linking,
-  useColorScheme,
   Text,
 } from "react-native";
 import * as Location from "expo-location";
@@ -16,6 +11,7 @@ import MapView, { Marker } from "react-native-maps";
 
 
 // To locate the nearest recycling bin, an api should be used instead
+
 const sampleRecyclingBins = [
   {
     id: 1,
