@@ -7,9 +7,8 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
 export default function Home() {
-  const colorScheme = useColorScheme(); // Gets the current theme (light or dark)
-  
-  // Fake user data
+  const colorScheme = useColorScheme();
+
   const [userPoints, setUserPoints] = useState(19256); // Initial points
   
   const handleClaimReward = (pointsRequired: number, rewardName: string) => {
@@ -41,13 +40,12 @@ export default function Home() {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContentContainer}>
-        {/* Banner Image */}
+
         <Image
-          source={require('../assets/images/topbanner.jpg')} // Replace with your local image path
+          source={require('../assets/images/topbanner.jpg')}
           style={styles.banner}
         />
 
-        {/* Title and User Info */}
         <ThemedView style={styles.titleContainer}>
           <ThemedText type="title" style={styles.titleText}>Rewards</ThemedText>
         </ThemedView>
@@ -57,7 +55,6 @@ export default function Home() {
           <ThemedText type="subtitle" style={styles.userInfoText}>Points: {userPoints}</ThemedText>
         </ThemedView>
 
-        {/* Gold Member Bonus */}
         <ThemedView style={styles.sectionContainer}>
           <ThemedText type="subtitle" style={styles.sectionTitle}>Gold Member Bonus</ThemedText>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
@@ -76,7 +73,6 @@ export default function Home() {
           </ScrollView>
         </ThemedView>
 
-        {/* Silver Member Bonus */}
         <ThemedView style={styles.sectionContainer}>
           <ThemedText type="subtitle" style={styles.sectionTitle}>Silver Member Bonus</ThemedText>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
@@ -95,7 +91,6 @@ export default function Home() {
           </ScrollView>
         </ThemedView>
 
-        {/* Spacer to push navbar to the bottom */}
         <View style={styles.spacer} />
       </ScrollView>
 
