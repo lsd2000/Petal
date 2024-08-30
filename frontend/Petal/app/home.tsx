@@ -210,7 +210,7 @@ export default function Home() {
             <Text>Rewards</Text>
           </View>
         </Link>
-        <Link href="/faq" style={styles.navButton}>
+        <Link href="/Faq" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
             <Ionicons name="information-circle-outline" size={24} color="black" />
             <Text>FAQ</Text>
