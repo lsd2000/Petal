@@ -11,7 +11,7 @@ export default function Rewards() {
   // Fake user data
   const [userPoints, setUserPoints] = useState(19256); // Initial points
   
-  const handleClaimReward = (pointsRequired, rewardName) => {
+  const handleClaimReward = (pointsRequired: number, rewardName: string) => {
     if (userPoints >= pointsRequired) {
       setUserPoints(userPoints - pointsRequired);
       Alert.alert('Reward Claimed!', `You have successfully claimed ${rewardName}.`);
@@ -35,12 +35,12 @@ export default function Rewards() {
       </ThemedView>
 
       <ThemedView style={styles.userInfoContainer}>
-        <ThemedText type="subtitle">User: Shao Dong</ThemedText>
-        <ThemedText type="subtitle">Points: {userPoints}</ThemedText>
+        <ThemedText type="subtitle" style={styles.userInfoText}>User: Shao Dong</ThemedText>
+        <ThemedText type="subtitle" style={styles.userInfoText}>Points: {userPoints}</ThemedText>
       </ThemedView>
 
       <ThemedView style={styles.sectionContainer}>
-        <ThemedText type="subtitle">Gold Member Bonus</ThemedText>
+        <ThemedText type="subtitle" style={styles.sectionTitle}>Gold Member Bonus</ThemedText>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
           {goldMemberItems.map((item, index) => (
             <TouchableOpacity 
@@ -48,7 +48,7 @@ export default function Rewards() {
               style={styles.itemContainer}
               onPress={() => handleClaimReward(item.pointsRequired, item.name)}
             >
-              <Image source={item.image } style={styles.itemImage} />
+              <Image source={item.image} style={styles.itemImage} />
               <ThemedText style={styles.itemName}>{item.name}</ThemedText>
               <ThemedText style={styles.itemDescription}>{item.description}</ThemedText>
               <ThemedText style={styles.itemPoints}>Points Required: {item.pointsRequired}</ThemedText>
@@ -58,7 +58,7 @@ export default function Rewards() {
       </ThemedView>
 
       <ThemedView style={styles.sectionContainer}>
-        <ThemedText type="subtitle">Silver Member Bonus</ThemedText>
+        <ThemedText type="subtitle" style={styles.sectionTitle}>Silver Member Bonus</ThemedText>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
           {silverMemberItems.map((item, index) => (
             <TouchableOpacity 
@@ -66,7 +66,7 @@ export default function Rewards() {
               style={styles.itemContainer}
               onPress={() => handleClaimReward(item.pointsRequired, item.name)}
             >
-              <Image source={item.image } style={styles.itemImage} />
+              <Image source={item.image} style={styles.itemImage} />
               <ThemedText style={styles.itemName}>{item.name}</ThemedText>
               <ThemedText style={styles.itemDescription}>{item.description}</ThemedText>
               <ThemedText style={styles.itemPoints}>Points Required: {item.pointsRequired}</ThemedText>
@@ -92,7 +92,6 @@ const goldMemberItems = [
     image: require('@/assets/images/fairprice.jpg'),
     pointsRequired: 7000,
   },
-
   {
     name: 'Harvey Norman Discounts',
     description: '20% off on next purchase.',
@@ -115,14 +114,12 @@ const silverMemberItems = [
     image: require('@/assets/images/swenson.png'),
     pointsRequired: 2000,
   },
-
   {
     name: 'Mac discounts',
     description: '20% off on next purchase.',
     image: require('@/assets/images/macs.png'),
     pointsRequired: 2000,
   },
-
 ];
 
 const styles = StyleSheet.create({
@@ -145,10 +142,22 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 5,
     alignItems: 'center',
+    padding: 20,
+  },
+  userInfoText: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: '#333',
   },
   sectionContainer: {
     marginVertical: 10,
     paddingHorizontal: 10,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 10,
   },
   scrollView: {
     flexDirection: 'row',
@@ -157,32 +166,34 @@ const styles = StyleSheet.create({
   itemContainer: {
     marginRight: 20,
     alignItems: 'center',
-    width: 150,
-    backgroundColor: '#f9f9f9',
+    width: 180,
+    backgroundColor: '#fff',
     borderRadius: 10,
-    padding: 10,
     borderColor: '#ddd',
     borderWidth: 1,
+    padding: 10,
+    elevation: 3,
   },
   itemImage: {
-    width: 150,
+    width: '100%',
     height: 120,
     borderRadius: 10,
-    marginBottom: 5,
+    marginBottom: 10,
   },
   itemName: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: '#333',
     marginBottom: 4,
   },
   itemDescription: {
     fontSize: 14,
     color: '#666',
     textAlign: 'center',
+    marginBottom: 4,
   },
   itemPoints: {
     fontSize: 12,
     color: '#333',
-    marginTop: 4,
   },
 });
