@@ -1,9 +1,37 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Link } from 'expo-router';
-import { StyleSheet, View, Text, Image, ScrollView, Linking, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, Linking, TouchableOpacity, Animated, Easing } from 'react-native';
 
 export default function Home() {
+  const [flipped, setFlipped] = useState(false);
+  const flipAnimation = useRef(new Animated.Value(0)).current;
+
+  const flipCard = () => {
+    Animated.timing(flipAnimation, {
+      toValue: flipped ? 0 : 1,
+      duration: 500,
+      easing: Easing.linear,
+      useNativeDriver: true,
+    }).start();
+    setFlipped(!flipped);
+  };
+
+  const rotateY = flipAnimation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '180deg'],
+  });
+
+  const frontOpacity = flipAnimation.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [1, 0, 0],
+  });
+
+  const backOpacity = flipAnimation.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [0, 0, 1],
+  });
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContentContainer}>
@@ -31,6 +59,47 @@ export default function Home() {
           </View>
         </View>
 
+        {/* Tip of the Day Card */}
+        <TouchableOpacity onPress={flipCard}>
+          <View style={styles.tipCardContainer}>
+            <Animated.View style={[
+              styles.tipCard,
+              {
+                transform: [{ rotateY }],
+              },
+            ]}>
+              {/* Front Side of the Card */}
+              <Animated.View style={[
+                styles.cardFace,
+                styles.cardFront,
+                {
+                  opacity: frontOpacity,
+                },
+              ]}>
+                <View style={styles.cardFrontContent}>
+                  <Image
+                    source={require('../assets/images/icon2.png')} // Replace with your local image path
+                    style={styles.tipIcon}
+                  />
+                  <Text style={styles.tipFrontText}>Tip of the Day</Text>
+                </View>
+              </Animated.View>
+              {/* Back Side of the Card */}
+              <Animated.View style={[
+                styles.cardFace,
+                styles.cardBack,
+                {
+                  opacity: backOpacity,
+                },
+              ]}>
+                <Text style={styles.tipBackText}>
+                  Remember to recycle your plastic bottles by rinsing them before disposal to ensure they are properly processed. Proper recycling helps conserve natural resources and reduces pollution.
+                </Text>
+              </Animated.View>
+            </Animated.View>
+          </View>
+        </TouchableOpacity>
+
         {/* Event Section */}
         <Text style={styles.eventText}>Events you may like:</Text>
 
@@ -47,28 +116,28 @@ export default function Home() {
           </TouchableOpacity>
           <TouchableOpacity onPress={() => Linking.openURL('https://www.ecoponics.com.sg/science-environment-workshops/upcycling-workshops/#')}>
             <View style={styles.eventContainer}>
-            <Image source={require('../assets/images/candle.jpg')} style={styles.eventImage} />
-            <Text style={styles.eventDescription} numberOfLines={1} ellipsizeMode="tail">
+              <Image source={require('../assets/images/candle.jpg')} style={styles.eventImage} />
+              <Text style={styles.eventDescription} numberOfLines={1} ellipsizeMode="tail">
                 Soy Candle Workshop
-            </Text>
+              </Text>
             </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => Linking.openURL('https://www.ecoponics.com.sg/science-environment-workshops/upcycling-workshops/upcycling-self-watering-planter/')}>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('https://www.ecoponics.com.sg/science-environment-workshops/upcycling-workshops/upcycling-self-watering-planter/')}>
             <View style={styles.eventContainer}>
-            <Image source={require('../assets/images/piggy.jpg')} style={styles.eventImage} />
-            <Text style={styles.eventDescription} numberOfLines={1} ellipsizeMode="tail">
+              <Image source={require('../assets/images/piggy.jpg')} style={styles.eventImage} />
+              <Text style={styles.eventDescription} numberOfLines={1} ellipsizeMode="tail">
                 Pet Bottle Self-Watering Planter Workshop
-            </Text>
+              </Text>
             </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => Linking.openURL('https://www.ecoponics.com.sg/science-environment-workshops/upcycling-workshops/upcycling-toilet-roll-stationery-holder/')}>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('https://www.ecoponics.com.sg/science-environment-workshops/upcycling-workshops/upcycling-toilet-roll-stationery-holder/')}>
             <View style={styles.eventContainer}>
-            <Image source={require('../assets/images/pencil.jpg')} style={styles.eventImage} />
-            <Text style={styles.eventDescription} numberOfLines={1} ellipsizeMode="tail">
+              <Image source={require('../assets/images/pencil.jpg')} style={styles.eventImage} />
+              <Text style={styles.eventDescription} numberOfLines={1} ellipsizeMode="tail">
                 Pencil Holder Workshop
-            </Text>
+              </Text>
             </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
         </ScrollView>
 
         {/* News Section */}
@@ -87,28 +156,28 @@ export default function Home() {
           </TouchableOpacity>
           <TouchableOpacity onPress={() => Linking.openURL('https://www.channelnewsasia.com/singapore/beverage-container-return-scheme-pushed-back-recycling-producers-request-4516481')}>
             <View style={styles.eventContainer}>
-            <Image source={require('../assets/images/bottle.jpg')} style={styles.eventImage} />
-            <Text style={styles.eventDescription} numberOfLines={1} ellipsizeMode="tail">
+              <Image source={require('../assets/images/bottle.jpg')} style={styles.eventImage} />
+              <Text style={styles.eventDescription} numberOfLines={1} ellipsizeMode="tail">
                 Beverage container return scheme launch pushed back by a year
-            </Text>
+              </Text>
             </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => Linking.openURL('https://www.channelnewsasia.com/watch/supermarkets-ordering-less-plastic-bags-demand-other-retailers-still-high-manufacturers-4455246')}>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('https://www.channelnewsasia.com/watch/supermarkets-ordering-less-plastic-bags-demand-other-retailers-still-high-manufacturers-4455246')}>
             <View style={styles.eventContainer}>
-            <Image source={require('../assets/images/bags.png')} style={styles.eventImage} />
-            <Text style={styles.eventDescription} numberOfLines={1} ellipsizeMode="tail">
+              <Image source={require('../assets/images/bags.png')} style={styles.eventImage} />
+              <Text style={styles.eventDescription} numberOfLines={1} ellipsizeMode="tail">
                 Supermarkets ordering less plastic bags
-            </Text>
+              </Text>
             </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => Linking.openURL('https://www.channelnewsasia.com/singapore/recycling-contamination-food-waste-awareness-education-4423631')}>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('https://www.channelnewsasia.com/singapore/recycling-contamination-food-waste-awareness-education-4423631')}>
             <View style={styles.eventContainer}>
-            <Image source={require('../assets/images/contam.png')} style={styles.eventImage} />
-            <Text style={styles.eventDescription} numberOfLines={1} ellipsizeMode="tail">
+              <Image source={require('../assets/images/contam.png')} style={styles.eventImage} />
+              <Text style={styles.eventDescription} numberOfLines={1} ellipsizeMode="tail">
                 Contamination of several batches of recyclable items
-            </Text>
+              </Text>
             </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
         </ScrollView>
 
         {/* Spacer to push navbar to the bottom */}
@@ -137,13 +206,13 @@ export default function Home() {
         </Link>
         <Link href="/rewards" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
-            <Ionicons name="gift-outline" size={24} color="black" />
+            <Ionicons name="star-outline" size={24} color="black" />
             <Text>Rewards</Text>
           </View>
         </Link>
         <Link href="/faq" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
-            <Ionicons name="help-outline" size={24} color="black" />
+            <Ionicons name="information-circle-outline" size={24} color="black" />
             <Text>FAQ</Text>
           </View>
         </Link>
@@ -158,30 +227,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   scrollContentContainer: {
-    paddingBottom: 80, // To ensure space for the navbar
+    flexGrow: 1,
   },
   banner: {
     width: '100%',
-    height: 150, // Adjust the height as needed
-    resizeMode: 'cover',
+    height: 150,
   },
   welcomeText: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginVertical: 20, // Add vertical margin for spacing
-    marginHorizontal: 16, // Maintain horizontal padding if needed
-  },
-  eventText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginVertical: 20, // Add vertical margin for spacing
-    marginHorizontal: 16, // Maintain horizontal padding if needed
-  },
-  newsText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginVertical: 20, // Add vertical margin for spacing
-    marginHorizontal: 16, // Maintain horizontal padding if needed
+    margin: 16,
   },
   infoRow: {
     flexDirection: 'row',
@@ -222,6 +277,72 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 4,
   },
+  tipCardContainer: {
+    marginHorizontal: 16,
+    marginBottom: 20,
+    height: 200, // Set height to accommodate card flip
+  },
+  tipCard: {
+    flex: 1,
+    borderRadius: 8,
+    backgroundColor: '#f5f5f5',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2, // For Android shadow
+    overflow: 'hidden', // Ensures content is clipped to card border
+  },
+  cardFace: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cardFront: {
+    backgroundColor: '#FDD9E5',
+    padding: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  cardBack: {
+    backgroundColor: '#FFEBEF',
+    transform: [{ rotateY: '180deg' }],
+    padding: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  tipFrontText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  tipBackText: {
+    fontSize: 16,
+    color: '#333',
+    textAlign: 'center',
+    padding: 15,
+  },
+  tipIcon: {
+    width: 100,
+    height: 70,
+    marginBottom: 10, // Space between image and text
+  },
+  eventText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginHorizontal: 16,
+    marginBottom: 10,
+  },
+  newsText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginHorizontal: 16,
+    marginBottom: 10,
+  },
   eventScroller: {
     marginHorizontal: 16,
   },
@@ -257,5 +378,8 @@ const styles = StyleSheet.create({
   },
   spacer: {
     height: 80, // Adjust this value to create enough space above the navbar
+  },
+  cardFrontContent: {
+    alignItems: 'center',
   },
 });
