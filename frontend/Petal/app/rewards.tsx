@@ -123,19 +123,19 @@ export default function Home() {
 const goldMemberItems = [
   {
     name: 'Grab Delivery Vouchers',
-    description: '20% off on all store items.',
+    description: '20% off next purchase',
     image: require('@/assets/images/grab.png'),
     pointsRequired: 5000,
   },
   {
     name: 'Sheng Siong Vouchers',
-    description: 'Free shipping on orders over $50.',
+    description: '$50 shopping voucher',
     image: require('@/assets/images/fairprice.jpg'),
     pointsRequired: 7000,
   },
   {
     name: 'Harvey Norman Discounts',
-    description: '20% off on next purchase.',
+    description: '20% off next purchase',
     image: require('@/assets/images/harvey.jpg'),
     pointsRequired: 9000,
   },
@@ -144,19 +144,19 @@ const goldMemberItems = [
 const silverMemberItems = [
   {
     name: 'Yakun Discounts',
-    description: '20% off on next purchase.',
+    description: '20% off next purchase',
     image: require('@/assets/images/yakun.jpg'),
     pointsRequired: 2000,
   },
   {
     name: 'Swensons Vouchers',
-    description: '20% off on next purchase.',
+    description: '$10 Voucher',
     image: require('@/assets/images/swenson.png'),
     pointsRequired: 2000,
   },
   {
     name: 'Mac Discounts',
-    description: '20% off on next purchase.',
+    description: '$10 Voucher',
     image: require('@/assets/images/macs.png'),
     pointsRequired: 2000,
   },
