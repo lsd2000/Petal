@@ -66,7 +66,7 @@ export default function Rewards() {
               style={styles.itemContainer}
               onPress={() => handleClaimReward(item.pointsRequired, item.name)}
             >
-              <Image source={{ uri: item.image }} style={styles.itemImage} />
+              <Image source={item.image } style={styles.itemImage} />
               <ThemedText style={styles.itemName}>{item.name}</ThemedText>
               <ThemedText style={styles.itemDescription}>{item.description}</ThemedText>
               <ThemedText style={styles.itemPoints}>Points Required: {item.pointsRequired}</ThemedText>
@@ -81,34 +81,48 @@ export default function Rewards() {
 // Sample items for Gold and Silver Members
 const goldMemberItems = [
   {
-    name: 'Gold Member Exclusive Item 1',
+    name: 'Grab Delivery Vouchers',
     description: '20% off on all store items.',
-    image: require('@/assets/images/grab.png'), // Replace with actual item image URL
+    image: require('@/assets/images/grab.png'),
     pointsRequired: 5000,
   },
   {
-    name: 'Gold Member Exclusive Item 2',
+    name: 'Sheng Siong Vouchers',
     description: 'Free shipping on orders over $50.',
-    image: 'https://example.com/item2.jpg', // Replace with actual item image URL
+    image: require('@/assets/images/fairprice.jpg'),
     pointsRequired: 7000,
+  },
+
+  {
+    name: 'Harvey Norman Discounts',
+    description: '20% off on next purchase.',
+    image: require('@/assets/images/harvey.jpg'),
+    pointsRequired: 9000,
   },
   // Add more items as needed
 ];
 
 const silverMemberItems = [
   {
-    name: 'Silver Member Exclusive Item 1',
-    description: 'Free item with every purchase over $50.',
-    image: 'https://example.com/item1.jpg', // Replace with actual item image URL
-    pointsRequired: 3000,
+    name: 'Yakun Discounts',
+    description: '20% off on next purchase.',
+    image: require('@/assets/images/yakun.jpg'),
+    pointsRequired: 2000,
   },
   {
-    name: 'Silver Member Exclusive Item 2',
-    description: '10% off on select items.',
-    image: 'https://example.com/item2.jpg', // Replace with actual item image URL
-    pointsRequired: 4000,
+    name: 'Swensons Vouchers',
+    description: '20% off on next purchase.',
+    image: require('@/assets/images/swenson.png'),
+    pointsRequired: 2000,
   },
-  // Add more items as needed
+
+  {
+    name: 'Mac discounts',
+    description: '20% off on next purchase.',
+    image: require('@/assets/images/macs.png'),
+    pointsRequired: 2000,
+  },
+
 ];
 
 const styles = StyleSheet.create({
