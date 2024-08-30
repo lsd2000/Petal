@@ -59,7 +59,10 @@ export default function Home() {
           {/* Top Right - Points Info */}
           <View style={styles.topRightBox}>
             <Text style={styles.pointsText}>{userPoints} points</Text>
-            <Text style={styles.expiryText}>Expiring on 31st Dec 2025</Text>
+            <Text style={styles.expiryText}>Expiry: 31/12/2025</Text>
+            <Text style={styles.tierText}>
+              11750 points to <Text style={styles.emeraldText}>Emerald</Text>
+            </Text>
           </View>
 
           {/* Barcode */}
@@ -345,7 +348,7 @@ const styles = StyleSheet.create({
   },
   topRightBox: {
     position: 'absolute',
-    top: 20,
+    top: 15,
     right: 20,
     alignItems: 'flex-end',
   },
@@ -358,6 +361,15 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666',
     marginTop: 5,
+  },
+  tierText: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 5,
+  },
+  emeraldText: {
+    color: '#50C878', // Emerald green color code
+    fontWeight: 'bold', // Optional: Make it bold for emphasis
   },
   infoText: {
     fontSize: 22,
