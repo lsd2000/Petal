@@ -3,6 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemedText } from "@/components/ThemedText";
 import { TextInput, Button } from "react-native-paper";
 import * as React from "react";
+import { Link } from 'expo-router';
 
 export default function Index() {
   const [usertext, setUserText] = React.useState("");
@@ -31,9 +32,11 @@ export default function Index() {
           onChangeText={(passwordtext) => setPasswordText(passwordtext)}
         />
         <View style={styles.buttonContainer}>
+          <Link href="/tabs/home" asChild>
           <Button style={{backgroundColor:"#FC6C85"}}mode="contained" onPress={() => console.log("Pressed")}>
             Login
           </Button>
+          </Link>
         </View>
       </View>
     </SafeAreaView>
