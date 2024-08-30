@@ -54,8 +54,8 @@ export default function Home() {
             </View>
           </View>
           <View style={styles.infoBox}>
-            <Text style={styles.infoTitle}>Current Points:</Text>
-            <Text style={styles.infoValueBlack}>8250</Text>
+            <Text style={styles.infoTitle}>Lifteime Earnings:</Text>
+            <Text style={styles.infoValueBlack}>48250</Text>
           </View>
         </View>
 
@@ -206,7 +206,7 @@ export default function Home() {
         </Link>
         <Link href="/rewards" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
-            <Ionicons name="star-outline" size={24} color="black" />
+            <Ionicons name="gift-outline" size={24} color="black" />
             <Text>Rewards</Text>
           </View>
         </Link>

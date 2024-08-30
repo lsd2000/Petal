@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Link } from 'expo-router';
-import { StyleSheet, Image, View, ScrollView, TouchableOpacity, Alert, useColorScheme } from 'react-native';
+import { StyleSheet, Image, View, ScrollView, TouchableOpacity, Alert, useColorScheme, Text } from 'react-native';
 
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -12,7 +12,7 @@ export default function Home() {
   // Fake user data
   const [userPoints, setUserPoints] = useState(19256); // Initial points
   
-  const handleClaimReward = (pointsRequired: number, rewardName: string) => {
+  const handleClaimReward = (pointsRequired, rewardName) => {
     if (userPoints < pointsRequired) {
       Alert.alert('Insufficient Points', 'You do not have enough points to claim this reward.');
       return;
@@ -46,24 +46,36 @@ export default function Home() {
           source={require('../assets/images/topbanner.jpg')}
           style={styles.banner}
         />
+        <Text style={styles.infoText}>Lee Shaodong</Text>
+        
+        {/* Membership Card */}
+        <ThemedView style={styles.membershipCard}>
+          {/* Top Left - Petal and Gold */}
+          <View style={styles.topLeftBox}>
+            <Text style={styles.petalText}>Petal</Text>
+            <Text style={styles.goldText}>Gold</Text>
+          </View>
 
-        <ThemedView style={styles.titleContainer}>
-          <Ionicons name="gift-outline" size={24} color="#333" style={styles.icon} />
-          <ThemedText type="title" style={styles.titleText}>Rewards</ThemedText>
+          {/* Top Right - Points Info */}
+          <View style={styles.topRightBox}>
+            <Text style={styles.pointsText}>{userPoints} points</Text>
+            <Text style={styles.expiryText}>Expiring on 31st Dec 2025</Text>
+          </View>
+
+          {/* Barcode */}
+          <View style={styles.barcodeContainer}>
+            <Image
+              source={require('../assets/images/barcode.png')} // Replace with your barcode image
+              style={styles.barcodeImage}
+            />
+            <Text style={styles.barcodeNumber}>1234 5678 9012 3456</Text>
+          </View>
+
         </ThemedView>
 
-        <ThemedView style={styles.userInfoContainer}>
-          <Ionicons name="person-outline" size={24} color="#333" style={styles.icon} />
-          <ThemedText type="subtitle" style={styles.userInfoText}>User: Shao Dong</ThemedText>
-        </ThemedView>
-
-        <ThemedView style={styles.userInfoContainer}>
-          <Ionicons name="cash-outline" size={24} color="#333" style={styles.icon} />
-          <ThemedText type="subtitle" style={styles.userInfoText}>Points: {userPoints}</ThemedText>
-        </ThemedView>
-
+        {/* Rest of the content remains the same */}
         <ThemedView style={styles.sectionContainer}>
-          <ThemedText type="subtitle" style={styles.sectionTitle}>Gold Member Bonus</ThemedText>
+          <ThemedText type="subtitle" style={styles.goldsectionTitle}>Gold Member Bonus</ThemedText>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
             {goldMemberItems.map((item, index) => (
               <TouchableOpacity 
@@ -73,7 +85,6 @@ export default function Home() {
               >
                 <Image source={item.image} style={styles.itemImage} />
                 <ThemedText style={styles.itemName}>{item.name}</ThemedText>
-                <ThemedText style={styles.itemDescription}>{item.description}</ThemedText>
                 <ThemedText style={styles.itemPoints}>Points Required: {item.pointsRequired}</ThemedText>
               </TouchableOpacity>
             ))}
@@ -81,7 +92,7 @@ export default function Home() {
         </ThemedView>
 
         <ThemedView style={styles.sectionContainer}>
-          <ThemedText type="subtitle" style={styles.sectionTitle}>Silver Member Bonus</ThemedText>
+          <ThemedText type="subtitle" style={styles.silversectionTitle}>Silver Member Bonus</ThemedText>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
             {silverMemberItems.map((item, index) => (
               <TouchableOpacity 
@@ -91,7 +102,6 @@ export default function Home() {
               >
                 <Image source={item.image} style={styles.itemImage} />
                 <ThemedText style={styles.itemName}>{item.name}</ThemedText>
-                <ThemedText style={styles.itemDescription}>{item.description}</ThemedText>
                 <ThemedText style={styles.itemPoints}>Points Required: {item.pointsRequired}</ThemedText>
               </TouchableOpacity>
             ))}
@@ -105,32 +115,32 @@ export default function Home() {
       <View style={styles.navbar}>
         <Link href="/home" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
-            <Ionicons name="home-outline" size={24} color="#333" />
-            <ThemedText style={styles.navText}>Home</ThemedText>
+            <Ionicons name="home-outline" size={24} color="black" />
+            <Text>Home</Text>
           </View>
         </Link>
         <Link href="/scan" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
-            <Ionicons name="search-outline" size={24} color="#333" />
-            <ThemedText style={styles.navText}>Scan</ThemedText>
+            <Ionicons name="search-outline" size={24} color="black" />
+            <Text>Scan</Text>
           </View>
         </Link>
         <Link href="/location" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
-            <Ionicons name="location-outline" size={24} color="#333" />
-            <ThemedText style={styles.navText}>Locate</ThemedText>
+            <Ionicons name="location-outline" size={24} color="black" />
+            <Text>Locate</Text>
           </View>
         </Link>
         <Link href="/rewards" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
-            <Ionicons name="gift-outline" size={24} color="#333" />
-            <ThemedText style={styles.navText}>Rewards</ThemedText>
+            <Ionicons name="gift-outline" size={24} color="black" />
+            <Text>Rewards</Text>
           </View>
         </Link>
         <Link href="/faq" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
-            <Ionicons name="help-outline" size={24} color="#333" />
-            <ThemedText style={styles.navText}>FAQ</ThemedText>
+            <Ionicons name="information-circle-outline" size={24} color="black" />
+            <Text>FAQ</Text>
           </View>
         </Link>
       </View>
@@ -141,20 +151,17 @@ export default function Home() {
 // Sample items for Gold and Silver Members
 const goldMemberItems = [
   {
-    name: 'Grab Delivery Vouchers',
-    description: '20% off next purchase',
+    name: '$20 GrabFood Vouchers',
     image: require('@/assets/images/grab.png'),
     pointsRequired: 5000,
   },
   {
-    name: 'Sheng Siong Vouchers',
-    description: '$50 shopping voucher',
+    name: '$50 Sheng Siong Vouchers',
     image: require('@/assets/images/fairprice.jpg'),
     pointsRequired: 7000,
   },
   {
-    name: 'Harvey Norman Discounts',
-    description: '20% off next purchase',
+    name: 'Harvey Norman 10% Discounts',
     image: require('@/assets/images/harvey.jpg'),
     pointsRequired: 9000,
   },
@@ -162,20 +169,17 @@ const goldMemberItems = [
 
 const silverMemberItems = [
   {
-    name: 'Yakun Discounts',
-    description: '20% off next purchase',
-    image: require('@/assets/images/yakun.jpg'),
+    name: '$5 Yakun Discounts',
+    image: require('@/assets/images/yakun.png'),
     pointsRequired: 2000,
   },
   {
-    name: 'Swensons Vouchers',
-    description: '$10 Voucher',
+    name: '$10 Swensons Vouchers',
     image: require('@/assets/images/swenson.png'),
     pointsRequired: 2000,
   },
   {
-    name: 'Mac Discounts',
-    description: '$10 Voucher',
+    name: '$10 MacDonalds Vouchers',
     image: require('@/assets/images/macs.png'),
     pointsRequired: 2000,
   },
@@ -207,19 +211,12 @@ const styles = StyleSheet.create({
     color: '#333',
     fontFamily: 'Roboto-Bold',
   },
-  userInfoContainer: {
+  cardContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 15,
-    padding: 20,
-    backgroundColor: '#FFF',
-    borderRadius: 15,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 5,
+    marginVertical: 5,
   },
-  userInfoText: {
+  cardText: {
     fontSize: 18,
     color: '#333',
     fontFamily: 'Roboto-Regular',
@@ -235,81 +232,153 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     elevation: 5,
   },
-  sectionTitle: {
+  goldsectionTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#333',
+    color: '#F5BF03',
     marginBottom: 15,
     fontFamily: 'Roboto-Bold',
+    marginLeft: 15,
+  },
+  silversectionTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#707070',
+    marginBottom: 15,
+    fontFamily: 'Roboto-Bold',
+    marginLeft: 15,
   },
   scrollView: {
     flexDirection: 'row',
   },
   itemContainer: {
-    marginRight: 15,
-    alignItems: 'center',
-    width: 200,
-    backgroundColor: '#FFF',
-    borderRadius: 15,
-    borderColor: '#E0E0E0',
-    borderWidth: 1,
+    width: 180,
     padding: 15,
-    elevation: 5,
+    marginRight: 15,
+    borderRadius: 15,
+    alignItems: 'center',
     shadowColor: '#000',
     shadowOpacity: 0.2,
-    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 6,
+    elevation: 5,
+    borderWidth: 0.5,
+    borderColor: '#E0E0E0',
   },
+  
   itemImage: {
-    width: '100%',
-    height: 130,
-    borderRadius: 12,
-    marginBottom: 10,
+    width: 150,
+    height: 150,
+    borderRadius: 15,
   },
   itemName: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '700',
     color: '#333',
-    marginBottom: 5,
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'Roboto-Bold',
+    marginVertical: 10,
   },
   itemDescription: {
     fontSize: 14,
+    fontWeight: '400',
     color: '#666',
-    textAlign: 'center',
-    marginBottom: 5,
+    fontFamily: 'Roboto-Regular',
+    marginBottom: 10,
   },
   itemPoints: {
-    fontSize: 12,
-    color: '#333',
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#888',
     fontFamily: 'Roboto-Regular',
   },
   navbar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    backgroundColor: '#FFF',
+    flexDirection: "row",
+    justifyContent: "space-around",
+    backgroundColor: "#fff",
     paddingVertical: 10,
     borderTopWidth: 1,
-    borderTopColor: '#E0E0E0',
+    borderTopColor: "#ccc",
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
   },
   navButton: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   iconTextContainer: {
-    alignItems: 'center',
-  },
-  navText: {
-    fontSize: 12,
-    color: '#333',
-    marginTop: 4,
+    alignItems: "center",
   },
   spacer: {
-    height: 80,
+    height: 80, // Adjust this value to create enough space above the navbar
+  },
+  membershipCard: {
+    marginVertical: 15,
+    marginHorizontal: 20,
+    padding: 20,
+    backgroundColor: '#FFF',
+    borderRadius: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 4,
+    position: 'relative',
+    height: 200,
+  },
+  topLeftBox: {
+    position: 'absolute',
+    top: 15,
+    left: 20,
+    backgroundColor: 'transparent',
+  },
+  petalText: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#FFC1CC', 
+    alignContent: 'center',
+  },
+  goldText: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#F5BF03', 
+    left: 5,
+  },
+  topRightBox: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    alignItems: 'flex-end',
+  },
+  pointsText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  expiryText: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 5,
+  },
+  infoText: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginLeft: 25,
+    marginTop: 20,
+    marginBottom : 5,
+  },
+  barcodeContainer: {
+    marginTop: 80,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  barcodeImage: {
+    width: 280,
+    height: 40,
+    resizeMode: 'contain',
+  },
+  barcodeNumber: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
   },
 });
