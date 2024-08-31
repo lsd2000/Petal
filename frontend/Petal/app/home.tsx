@@ -55,7 +55,7 @@ export default function Home() {
             </View>
           </View>
           <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.infoBox}>
-            <Text style={styles.infoTitle}>Lifetime Earnings:</Text>
+            <Text style={styles.infoTitle}>Points Ranking:</Text>
             <Text style={styles.infoValueBlack}>48250</Text>
           </TouchableOpacity>
         </View>
@@ -189,11 +189,11 @@ export default function Home() {
       <View style={styles.navbar}>
         <Link href="/home" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
-            <Ionicons name="home-outline" size={24} color="black" />
+            <Ionicons name="home" size={24} color="black" />
             <Text>Home</Text>
           </View>
         </Link>
-        <Link href="/Scan" style={styles.navButton}>
+        <Link href="/scan" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
             <Ionicons name="search-outline" size={24} color="black" />
             <Text>Scan</Text>
@@ -211,7 +211,7 @@ export default function Home() {
             <Text>Rewards</Text>
           </View>
         </Link>
-        <Link href="/Faq" style={styles.navButton}>
+        <Link href="/faq" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
             <Ionicons name="information-circle-outline" size={24} color="black" />
             <Text>FAQ</Text>

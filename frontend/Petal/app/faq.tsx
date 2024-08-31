@@ -56,6 +56,9 @@ export default function Faq() {
           source={require('../assets/images/topbanner.jpg')}
           style={styles.banner}
         />
+      
+      <Text style={styles.chatText}>FAQ Chatbot</Text>
+
       {/* Body content */}
       <KeyboardAvoidingView
       style={styles.keyboardAvoidingView}
@@ -96,7 +99,7 @@ export default function Faq() {
             <Text>Home</Text>
           </View>
         </Link>
-        <Link href="/Scan" style={styles.navButton}>
+        <Link href="/scan" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
             <Ionicons name="search-outline" size={24} color="black" />
             <Text>Scan</Text>
@@ -116,7 +119,7 @@ export default function Faq() {
         </Link>
         <Link href="/faq" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
-            <Ionicons name="help-outline" size={24} color="black" />
+            <Ionicons name="information-circle" size={24} color="black" />
             <Text>FAQ</Text>
           </View>
         </Link>
@@ -189,7 +192,13 @@ const styles = StyleSheet.create({
   } ,
   banner: {
     width: '100%',
-    height: 180,
+    height: 150,
     resizeMode: 'cover',
+  },
+  chatText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    margin: 16,
+    alignSelf: 'center',
   },
 });

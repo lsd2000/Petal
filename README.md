@@ -9,6 +9,7 @@ The Petal app is designed to revolutionize recycling habits by integrating AI-dr
 - **Local Recycling Center Locator**: Integrates GPS technology to help users find the nearest recycling bins and centers effortlessly.
 - **Gamification and Rewards System**: Encourages sustainable behavior through in-app rewards and a competitive leaderboard to foster a community of proactive recyclers.
 - **Personalized Recycling Guidance**: Offers customized advice based on user behavior to promote effective waste reduction strategies.
+- **NEA Recycling Chatbot** : Utilize Large Language Model (LLM) and RAG framework using data NEA Recycling FAQ content to answer any recycling related query from the user
 
 ## Installation
 
