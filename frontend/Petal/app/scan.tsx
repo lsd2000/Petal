@@ -1,19 +1,87 @@
-import React from "react";
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { Link } from 'expo-router';
-import { StyleSheet, Image, View, ScrollView, TouchableOpacity, Linking, useColorScheme, Text } from 'react-native';
+import { useState } from "react";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { Link } from "expo-router";
+import {
+  Button,
+  Image,
+  View,
+  StyleSheet,
+  Dimensions,
+  Alert,
+  Platform,
+  Text,
+} from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import * as FileSystem from "expo-file-system";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+export default function Scan() {
+  const win = Dimensions.get("window");
+  const [image, setImage] = useState<string | null>(null);
+  const [ratio, setRatio] = useState(1);
+  const scale = 0.8;
 
-export default function Home() {
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      const { uri, width, height } = result.assets[0];
+      setImage(uri);
+      setRatio(height / width);
+
+      try {
+        // Read the file as base64
+        const fileBase64 = await FileSystem.readAsStringAsync(uri, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
+        // const base64Data = await readFile(uri, 'base64')
+        // Create FormData
+        const formData = new FormData();
+        formData.append("file", fileBase64);
+
+        // Make the request to FastAPI endpoint
+        const response = await fetch(
+          "https://petalbackend.onrender.com/upload",
+          {
+            method: "POST",
+            body: formData,
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          console.log(response.status);
+          throw new Error("Network response was not ok");
+        }
+
+        const output = await response.json();
+        // console.
+        console.log("Generated content:", output.fun_facts);
+        Alert.alert("Fun Facts", output.fun_facts);
+      } catch (error) {
+        console.error("Error:", error);
+        Alert.alert("Error", "Failed to upload image and generate content.");
+      }
+    }
+  };
+
+  const width = scale * win.width;
+  const height = ratio * width;
+
   return (
     <View style={styles.container}>
+              <Image
+          source={require('../assets/images/topbanner.jpg')}
+          style={styles.banner}
+        />
       {/* Body content */}
-      <Text>Scan</Text>
-
+      <Button title="Pick an image from camera roll" onPress={pickImage} />
+      {image && <Image source={{ uri: image }} style={{ width, height }} />}
       {/* Bottom Navbar */}
       <View style={styles.navbar}>
         <Link href="/home" style={styles.navButton}>
@@ -22,7 +90,7 @@ export default function Home() {
             <Text>Home</Text>
           </View>
         </Link>
-        <Link href="/scan" style={styles.navButton}>
+        <Link href="/Scan" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
             <Ionicons name="search-outline" size={24} color="black" />
             <Text>Scan</Text>
@@ -69,5 +137,10 @@ const styles = StyleSheet.create({
   },
   iconTextContainer: {
     alignItems: "center",
+  },
+  banner: {
+    width: '100%',
+    height: 180,
+    resizeMode: 'cover',
   },
 });
