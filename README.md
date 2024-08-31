@@ -11,6 +11,7 @@ The Petal app is designed to revolutionize recycling habits by integrating AI-dr
 - **Personalized Recycling Guidance**: Offers customized advice based on user behavior to promote effective waste reduction strategies.
 
 ## Installation
+
 ```bash
 git clone https://github.com/[YourGitHubUsername]/Petal.git
 cd frontend/Petal
@@ -18,6 +19,7 @@ cd frontend/Petal
 npm install
 # Start the application
 npm run web
+```
 
 Note that it does not work as an webapp as it uses ios/android dependencies. Please scan the QR code via your phone to test the app.
 
