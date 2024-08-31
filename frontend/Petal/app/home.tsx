@@ -55,7 +55,7 @@ export default function Home() {
             </View>
           </View>
           <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.infoBox}>
-            <Text style={styles.infoTitle}>Lifetime Earnings:</Text>
+            <Text style={styles.infoTitle}>Points Ranking:</Text>
             <Text style={styles.infoValueBlack}>48250</Text>
           </TouchableOpacity>
         </View>
