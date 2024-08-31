@@ -140,7 +140,7 @@ export default function Locate() {
         <Link href="/scan" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
             <Ionicons name="search-outline" size={24} color="black" />
-            <Text>Scan</Text>
+            <Text>scan</Text>
           </View>
         </Link>
         <Link href="/location" style={styles.navButton}>
