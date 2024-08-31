@@ -196,7 +196,7 @@ export default function Home() {
         <Link href="/scan" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
             <Ionicons name="search-outline" size={24} color="black" />
-            <Text>scan</Text>
+            <Text>Scan</Text>
           </View>
         </Link>
         <Link href="/location" style={styles.navButton}>
@@ -214,7 +214,7 @@ export default function Home() {
         <Link href="/faq" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
             <Ionicons name="information-circle-outline" size={24} color="black" />
-            <Text>faq</Text>
+            <Text>FAQ</Text>
           </View>
         </Link>
       </View>

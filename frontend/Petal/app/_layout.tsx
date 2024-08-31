@@ -31,7 +31,7 @@ export default function RootLayout() {
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="home" options={{ headerShown: false }} />
-      <Stack.Screen name="Scan" options={{ headerShown: false }} />
+      <Stack.Screen name="scan" options={{ headerShown: false }} />
       <Stack.Screen name="location" options={{ headerShown: false }} />
       <Stack.Screen name="rewards" options={{ headerShown: false }} />
       <Stack.Screen name="faq" options={{ headerShown: false }} />

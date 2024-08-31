@@ -158,10 +158,10 @@ export default function scan() {
       {/* {!(image != null && classification == null) ? null : <ActivityIndicator size={50} />} */}
       <Overlay isVisible={visible} onBackdropPress={toggleOverlay} overlayStyle={styles.overlaystyle} >
         <Text>{displayedText}</Text>
-        <View style={styles.spacer} />
+        {/* <View style={styles.spacer} /> */}
       </Overlay>
 
-
+      <View style={styles.spacer} />
       {/* Bottom Navbar */}
       <View style={styles.navbar}>
         <Link href="/home" style={styles.navButton}>
@@ -173,7 +173,7 @@ export default function scan() {
         <Link href="/scan" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
             <Ionicons name="search-outline" size={24} color="black" />
-            <Text>scan</Text>
+            <Text>Scan</Text>
           </View>
         </Link>
         <Link href="/location" style={styles.navButton}>
@@ -191,7 +191,7 @@ export default function scan() {
         <Link href="/faq" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
             <Ionicons name="information-circle-outline" size={24} color="black" />
-            <Text>faq</Text>
+            <Text>FAQ</Text>
           </View>
         </Link>
       </View>
@@ -375,7 +375,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: "#ccc",
     position: 'absolute',
-    bottom: 0,
+    bottom: -665,
     width: '100%',
   },
   navButton: {
