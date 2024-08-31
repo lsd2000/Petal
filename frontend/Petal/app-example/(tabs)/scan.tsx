@@ -1,102 +1,230 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Image, Platform } from 'react-native';
-
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
+import React from 'react';
+import { useEffect, useState } from 'react';
+import { Button, Image, View, StyleSheet, Dimensions, Alert, Platform, Pressable, Text, ActivityIndicator, ScrollView } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
+import Spinner from 'react-native-loading-spinner-overlay';
+// import { IndexPath, Layout, Select, SelectItem } from '@ui-kitten/components';
+import { Dropdown } from 'react-native-element-dropdown';
 import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import {Overlay} from "react-native-elements";
 
-export default function TabTwoScreen() {
+const data = [
+  { label: 'Recycling Information', value: 1 },
+  { label: 'Upcycle Ideas', value: 2 },
+  { label: 'Fun Facts!', value: 3 },
+];
+
+export default function Scan() {
+  const win = Dimensions.get("window");
+  const [isLoading, setLoading] = useState(false);
+  const [image, setImage] = useState<string | null>(null);
+  const [ratio, setRatio] = useState(1);
+  const [selectedValue, setValue] = useState(0)
+  const [funfacts, setFunFacts] = useState();
+  const [upcycle, setUpcycle] = useState();
+  const [classification, setClassification] = useState();
+  // const [selectedIndex, setSelectedIndex] = React.useState<IndexPath | IndexPath[]>();
+  const [displayedText, setText] = useState()
+  const [visible, setVisible] = useState(false);
+  const scale = 0.8;
+
+  const toggleOverlay = () => {
+    setVisible(!visible);
+  };
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      const { uri, width, height } = result.assets[0];
+      // console.log(uri)
+      setImage(uri);
+      // console.log(image)
+      setRatio(height / width);
+
+      // uploadImage()
+      // setLoading(true)
+    }
+  };
+
+  useEffect(() => {
+    // action on update of movies
+    if (image == null) return;
+    setLoading(true)
+    uploadImage()
+  }, [image]);
+
+  const uploadImage = async () => {
+    try {
+      // Read the file as base64
+      // console.log(image)
+      const uri = image
+      const fileBase64 = await FileSystem.readAsStringAsync(uri!, { encoding: FileSystem.EncodingType.Base64 });
+      // const base64Data = await readFile(uri, 'base64')
+      // Create FormData
+      const formData = new FormData();
+      formData.append('file', fileBase64);
+
+      // Make the request to FastAPI endpoint
+      const response = await fetch('https://petalbackend.onrender.com/upload', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      const output = await response.json();
+      setLoading(false)
+
+      if (!response.ok) {
+        // console.log(response.status)
+        // console.log(response.body)
+        throw new Error(output);
+      }
+
+      console.log('Generated content:', output.fun_facts);
+      // Alert.alert('Fun Facts', output.classification);
+      setClassification(output.classification)
+      setFunFacts(output.fun_facts)
+      setUpcycle(output.upcycle)
+
+    } catch (error) {
+      console.error('Error:', error);
+      Alert.alert('Error', 'Failed to upload image and generate content.');
+    }
+  }
+
+  function handleSelectChange(e: { label?: string; value: any; }): void {
+    setVisible(true)
+    setValue(e.value)
+    if (e.value == 1) {
+      setText(classification)
+    } else if (e.value == 2) {
+      setText(upcycle)
+    } else if (e.value == 3) [
+      setText(funfacts)
+    ]
+  }
+
+  const width = scale * win.width;
+  const height = ratio * width;
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={<Ionicons size={310} name="code-slash" style={styles.headerImage} />}>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText> library
-          to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+    <View>
+      
+      <Spinner
+        visible={isLoading}
+        textContent={'Loading...'}
+        textStyle={styles.spinnerTextStyle}
+      />
+      <View style={styles.imageUP}>
+        {image != null ? <Image source={{ uri: image }} style={{ width, height }} /> : null}
+      </View>
+      <Pressable style={styles.uploadButton} onPress={pickImage}>
+        <Text style={{ fontSize: 16, color: 'white' }}>{image ? "Pick new image from camera roll" : "Pick an image from camera roll"}</Text>
+      </Pressable>
+      {/* <Select
+        style={styles.select}
+        placeholder='Disabled'
+        disabled={true}
+      >
+        <SelectItem title='Recycling Information' />
+        <SelectItem title='Upcycle Ideas' />
+        <SelectItem title='Fun Facts!' />
+      </Select> */}
+      <Dropdown style={[styles.dropdown, { backgroundColor: (image == null || isLoading) ? "lightgray" : "white" }]}
+        disable={image == null || isLoading}
+        data={data}
+        labelField="label"
+        valueField="value"
+        placeholder={(image == null || isLoading) ? "Please upload an image" : 'What information are you looking for?'}
+        onChange={e =>
+          handleSelectChange(e)
+        }
+        dropdownPosition='top'
+      />
+      {/* <ScrollView> */}
+        {/* <ThemedText style={styles.displayText}>{displayedText}</ThemedText> */}
+      {/* </ScrollView> */}
+
+      {/* {!(image != null && classification == null) ? null : <ActivityIndicator size={50} />} */}
+      <Overlay isVisible={visible} onBackdropPress={toggleOverlay} overlayStyle={styles.overlaystyle} >
+        <Text>{displayedText}</Text>
+      </Overlay>
+    </View >
+
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  overlaystyle: {
+    // margin:15,
+    // marginEnd?
+    margin:50,
+    padding:10,
+    minWidth:"80%",
+    borderRadius:10
+    // backgroundColor:"black"
   },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
+  displayText: {
+    fontSize: 16,
+    // fontFamily:"lato"
+    bottom: -100
+  },
+  imageUP: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    bottom: -275
+  },
+  uploadButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: 'black',
+    top: 760,
+    left: 60,
+    // x
+    width: 300
+  },
+  loading: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  spinnerTextStyle: {
+    color: '#FFF'
+  },
+  dropdown: {
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    margin: 16,
+    height: 50,
+    backgroundColor: 'white',
+    borderRadius: 12,
+    padding: 12,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+
+    elevation: 2,
+    bottom: -630,
   },
 });

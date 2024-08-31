@@ -40,7 +40,7 @@ export default function TabLayout() {
             <TabBarIcon name={focused ? 'location' : 'location-outline'} color={color} />
           ),
         }}
-      />
+      /> *
       <Tabs.Screen
         name="reward"
         options={{
