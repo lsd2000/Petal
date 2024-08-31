@@ -137,10 +137,10 @@ export default function Locate() {
             <Text>Home</Text>
           </View>
         </Link>
-        <Link href="/Scan" style={styles.navButton}>
+        <Link href="/scan" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
             <Ionicons name="search-outline" size={24} color="black" />
-            <Text>Scan</Text>
+            <Text>scan</Text>
           </View>
         </Link>
         <Link href="/location" style={styles.navButton}>
@@ -155,10 +155,10 @@ export default function Locate() {
             <Text>Rewards</Text>
           </View>
         </Link>
-        <Link href="/Faq" style={styles.navButton}>
+        <Link href="/faq" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
             <Ionicons name="help-outline" size={24} color="black" />
-            <Text>FAQ</Text>
+            <Text>faq</Text>
           </View>
         </Link>
       </View>
