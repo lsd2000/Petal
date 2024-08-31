@@ -14,7 +14,7 @@ The Petal app is designed to revolutionize recycling habits by integrating AI-dr
 
 ```bash
 git clone https://github.com/[YourGitHubUsername]/Petal.git
-cd frontend/Petal
+cd Petal/frontend/Petal
 # Install dependencies
 npm install
 # Start the application
@@ -24,3 +24,5 @@ npm run web
 Note that it does not work as an webapp as it uses ios/android dependencies. Please scan the QR code via your phone to test the app.
 
 As there is currently no user service or authentication service, simply click login to enter the app and test the main features.
+
+There is no need to run the backend as it has already been deployed. 
