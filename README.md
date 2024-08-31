@@ -22,7 +22,7 @@ npm install
 npm run web
 ```
 
-Note that it does not work as an webapp as it uses ios/android dependencies. Please scan the QR code via your phone to test the app.
+Note that Node.js 20 is needed. It does not work as an webapp as it uses ios/android dependencies. Please scan the QR code via your phone to test the app.
 
 As there is currently no user service or authentication service, simply click login to enter the app and test the main features.
 
