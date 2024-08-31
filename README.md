@@ -26,4 +26,6 @@ Note that Node.js 20 is needed. It does not work as an webapp as it uses ios/and
 
 As there is currently no user service or authentication service, simply click login to enter the app and test the main features.
 
+Current testing shows that there might be issues with iOS functionality. The application is working as expected on Android devices.
+
 There is no need to run the backend as it has already been deployed. 
