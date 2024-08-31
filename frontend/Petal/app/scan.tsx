@@ -8,13 +8,14 @@ import {
   StyleSheet,
   Dimensions,
   Alert,
-  Platform,
   Text,
 } from "react-native";
+
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
 
 export default function Scan() {
+
   const win = Dimensions.get("window");
   const [image, setImage] = useState<string | null>(null);
   const [ratio, setRatio] = useState(1);
@@ -34,38 +35,33 @@ export default function Scan() {
 
       try {
         // Read the file as base64
-        const fileBase64 = await FileSystem.readAsStringAsync(uri, {
-          encoding: FileSystem.EncodingType.Base64,
-        });
+        const fileBase64 = await FileSystem.readAsStringAsync(uri, { encoding: FileSystem.EncodingType.Base64 });
         // const base64Data = await readFile(uri, 'base64')
         // Create FormData
         const formData = new FormData();
-        formData.append("file", fileBase64);
-
+        formData.append('file', fileBase64);
+        
         // Make the request to FastAPI endpoint
-        const response = await fetch(
-          "https://petalbackend.onrender.com/upload",
-          {
-            method: "POST",
-            body: formData,
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+        const response = await fetch('https://petalbackend.onrender.com/upload', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
 
         if (!response.ok) {
-          console.log(response.status);
-          throw new Error("Network response was not ok");
+            console.log(response.status)
+          throw new Error('Network response was not ok');
         }
 
         const output = await response.json();
         // console.
-        console.log("Generated content:", output.fun_facts);
-        Alert.alert("Fun Facts", output.fun_facts);
+        console.log('Generated content:', output.fun_facts);
+        Alert.alert('Fun Facts', output.fun_facts);
       } catch (error) {
-        console.error("Error:", error);
-        Alert.alert("Error", "Failed to upload image and generate content.");
+        console.error('Error:', error);
+        Alert.alert('Error', 'Failed to upload image and generate content.');
       }
     }
   };
