@@ -88,7 +88,7 @@ export default function Scan() {
         </Link>
         <Link href="/Scan" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
-            <Ionicons name="search-outline" size={24} color="black" />
+            <Ionicons name="search" size={24} color="black" />
             <Text>Scan</Text>
           </View>
         </Link>
@@ -106,7 +106,7 @@ export default function Scan() {
         </Link>
         <Link href="/Faq" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
-            <Ionicons name="help-outline" size={24} color="black" />
+            <Ionicons name="information-circle-outline" size={24} color="black" />
             <Text>FAQ</Text>
           </View>
         </Link>
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   },
   banner: {
     width: '100%',
-    height: 180,
+    height: 150,
     resizeMode: 'cover',
   },
 });

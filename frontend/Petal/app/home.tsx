@@ -189,7 +189,7 @@ export default function Home() {
       <View style={styles.navbar}>
         <Link href="/home" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
-            <Ionicons name="home-outline" size={24} color="black" />
+            <Ionicons name="home" size={24} color="black" />
             <Text>Home</Text>
           </View>
         </Link>

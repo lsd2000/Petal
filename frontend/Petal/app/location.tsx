@@ -145,7 +145,7 @@ export default function Locate() {
         </Link>
         <Link href="/location" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
-            <Ionicons name="location-outline" size={24} color="black" />
+            <Ionicons name="location" size={24} color="black" />
             <Text>Locate</Text>
           </View>
         </Link>
@@ -157,7 +157,7 @@ export default function Locate() {
         </Link>
         <Link href="/Faq" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
-            <Ionicons name="help-outline" size={24} color="black" />
+            <Ionicons name="information-circle-outline" size={24} color="black" />
             <Text>FAQ</Text>
           </View>
         </Link>

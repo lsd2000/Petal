@@ -136,7 +136,7 @@ export default function Home() {
         </Link>
         <Link href="/rewards" style={styles.navButton}>
           <View style={styles.iconTextContainer}>
-            <Ionicons name="gift-outline" size={24} color="black" />
+            <Ionicons name="gift" size={24} color="black" />
             <Text>Rewards</Text>
           </View>
         </Link>
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   },
   banner: {
     width: '100%',
-    height: 180,
+    height: 150,
     resizeMode: 'cover',
   },
   titleContainer: {
